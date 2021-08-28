@@ -13,6 +13,6 @@ namespace RitmoApi.Context
         {
 
         }
-        public DbSet<Ritmo> CANTANTES { get; set; }
+        public DbSet<Ritmo> CantantesDB { get; set; }
     }
 }

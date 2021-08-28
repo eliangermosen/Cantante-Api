@@ -1,34 +1,42 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using CantanteApi.Models;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using RitmoApi.Context;
-using RitmoApi.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-
-namespace RitmoApi.Controllers
+namespace CantanteApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class RitmoController : ControllerBase
+    public class CantanteController : ControllerBase
     {
-        private readonly AppDbContext context;
+        //[HttpGet]
+        //public IEnumerable<Models.Cantante> Get()
+        //{
+        //    using (var db = new Models.CantantesContext())
+        //    {
+        //        IEnumerable<Models.Cantante> cantante = db.Cantantes.ToList();
+        //        return cantante;
+        //    }
+        //}
 
-        public RitmoController(AppDbContext context)
+        private readonly CantantesContext context;
+
+        public CantanteController(CantantesContext context)
         {
             this.context = context;
         }
 
-        // GET: api/<RitmoController>
+        // GET: api/<CantanteController>
         [HttpGet]
         public ActionResult Get()
         {
             try
             {
-                return Ok(context.CantantesDB.ToList());
+                return Ok(context.Cantantes.ToList());
             }
             catch (Exception ex)
             {
@@ -36,13 +44,13 @@ namespace RitmoApi.Controllers
             }
         }
 
-        // GET api/<RitmoController>/5
-        [HttpGet("{id}", Name ="GetRitmo")]
+        // GET api/<CantanteController>/5
+        [HttpGet("{id}", Name = "GetCantante")]
         public ActionResult Get(int id)
         {
             try
             {
-                var cantantes = context.CantantesDB.FirstOrDefault(c => c.ID == id);
+                var cantantes = context.Cantantes.FirstOrDefault(c => c.Id == id);
                 return Ok(cantantes);
             }
             catch (Exception ex)
@@ -51,15 +59,15 @@ namespace RitmoApi.Controllers
             }
         }
 
-        // POST api/<RitmoController>
+        // POST api/<CantanteController>
         [HttpPost]
-        public ActionResult Post([FromBody]Ritmo ritmo)
+        public ActionResult Post([FromBody] Cantante cantante)
         {
             try
             {
-                context.CantantesDB.Add(ritmo);
+                context.Cantantes.Add(cantante);
                 context.SaveChanges();
-                return CreatedAtRoute("GetRitmo", new { id = ritmo.ID }, ritmo);
+                return CreatedAtRoute("GetCantante", new { id = cantante.Id }, cantante);
             }
             catch (Exception ex)
             {
@@ -67,17 +75,17 @@ namespace RitmoApi.Controllers
             }
         }
 
-        // PUT api/<RitmoController>/5
+        // PUT api/<CantanteController>/5
         [HttpPut("{id}")]
-        public ActionResult Put(int id, [FromBody]Ritmo ritmo)
+        public ActionResult Put(int id, [FromBody] Cantante cantante)
         {
             try
             {
-                if (ritmo.ID == id)
+                if (cantante.Id == id)
                 {
-                    context.Entry(ritmo).State = EntityState.Modified;
+                    context.Entry(cantante).State = EntityState.Modified;
                     context.SaveChanges();
-                    return CreatedAtRoute("GetRitmo", new { id = ritmo.ID }, ritmo);
+                    return CreatedAtRoute("GetCantante", new { id = cantante.Id }, cantante);
                 }
                 else
                 {
@@ -90,16 +98,16 @@ namespace RitmoApi.Controllers
             }
         }
 
-        // DELETE api/<RitmoController>/5
+        // DELETE api/<CantanteController>/5
         [HttpDelete("{id}")]
         public ActionResult Delete(int id)
         {
             try
             {
-                var ritmo = context.CantantesDB.FirstOrDefault(c => c.ID == id);
-                if (ritmo != null)
+                var cantante = context.Cantantes.FirstOrDefault(c => c.Id == id);
+                if (cantante != null)
                 {
-                    context.CantantesDB.Remove(ritmo);
+                    context.Cantantes.Remove(cantante);
                     context.SaveChanges();
                     return Ok(id);
                 }
