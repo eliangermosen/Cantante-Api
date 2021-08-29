@@ -1,10 +1,10 @@
 # API Cantante 
-WEB API C# WITH ENTITY FRAMEWORK AND SQL SERVER DATABASE.
+WEB API C# WITH ENTITY FRAMEWORK & SQL SERVER DATABASE.
 
-## Programming languages:
+## Programming language:
 <img alt="C#" src="https://img.shields.io/badge/C Sharp%20-%232370ED.svg?logo=csharp&logoColor=white">
 
-## Databases:
+## Database:
 <img alt="SQLServer" src="https://img.shields.io/badge/SQL Server%20-%23430098.svg?logo=microsoftsqlserver&logoColor=white">
 
 ## Software & Tools:
